@@ -3,7 +3,7 @@ name: Deploy Node.js project to function app
 on:
   push:
     branches:
-      - 'main'
+      - 'develop'
 
 env:
   AZURE_FUNCTIONAPP_NAME: Credential-Manager-test  # set this to your application's name
