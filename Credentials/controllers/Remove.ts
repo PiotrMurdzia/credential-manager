@@ -25,6 +25,10 @@ export const remove = async (req: HttpRequest) => {
         await Credential.delete(response_from_db);
     }
     catch (error) {
+        if (error.status) {
+            return error;
+        }
+
         return {
             status: 500,
             body: {
