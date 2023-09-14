@@ -31,6 +31,10 @@ export const get = async (req: HttpRequest) => {
         };
     }
     catch (error) {
+        if (error.status) {
+            return error;
+        }
+
         return {
             status: 500,
             body: {

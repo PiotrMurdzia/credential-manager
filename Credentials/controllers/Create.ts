@@ -28,6 +28,10 @@ export const create = async (req: HttpRequest) => {
         await Credential.create(encrypt_password, uuid);
     }
     catch (error) {
+        if (error.status) {
+            return error;
+        }
+
         return {
             status: 500,
             body: {
