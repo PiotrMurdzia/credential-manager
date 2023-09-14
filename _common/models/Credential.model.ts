@@ -46,9 +46,9 @@ export default class Credential {
      * @param {string} id_entity - Client id_entity
      * @return {object} - Return object from DB
      **/
-    static get = async (id_entity: string) => {
+    static get = async (id_entity: number) => {
         // Define the query
-        const query = new AzureStorage.TableQuery().where('id_entity eq ?', id_entity);
+        const query = new AzureStorage.TableQuery().where('id_entity eq ?', id_entity.toString());
 
         // Get objects from DB
         const results: any = await new Promise((resolve, reject) => {
