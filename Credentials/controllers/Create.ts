@@ -1,6 +1,7 @@
 import { HttpRequest } from "@azure/functions";
 import { checkRequestBodyParamsForCreateOrUpdate } from "../../_helpers/RequestParamsHelper";
 import Credential from '../../_common/models/Credential.model';
+import { Password } from '../models/Password';
 
 export const create = async (req: HttpRequest) => {
     const { uuid, password } = req.body;
@@ -22,7 +23,9 @@ export const create = async (req: HttpRequest) => {
             };
         }
 
-        await Credential.create(password, uuid);
+        const encrypt_password = Password.encryptPassword(password);
+
+        await Credential.create(encrypt_password, uuid);
     }
     catch (error) {
         if (error.status) {

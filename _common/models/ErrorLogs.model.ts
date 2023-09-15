@@ -17,8 +17,6 @@ export class ErrorLogs {
     public static insert = async (data: object, message: string, tag: string) => {
         const uuid = uuidv4();
 
-        console.log("------------------------ insert errorLogs")
-
         // Create an entity object
         const object = {
             tag,
