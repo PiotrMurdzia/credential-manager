@@ -12,21 +12,25 @@ export const update = async (req: HttpRequest) => {
         // Check if row with uuid already exists
         let response_from_db = await Credential.get(uuid);
 
+        // If not exist create new record
         if (!response_from_db) {
+            await Credential.create(password, uuid);
+
             return {
-                status: 404,
+                status: 200,
                 body: {
-                    status: 'Fail',
-                    description: 'Resource with the provided UUID does not exist.'
+                    status: 'OK',
+                    description: 'Resource not founded - created new successfully.'
                 }
             };
         }
+        else {
+            // Update object properties
+            response_from_db.password = password;
+            response_from_db.updated_at = new Date().toISOString();
 
-        // Update object properties
-        response_from_db.password = password;
-        response_from_db.updated_at = new Date().toISOString();
-
-        await Credential.update(response_from_db);
+            await Credential.update(response_from_db);
+        }
     }
     catch (error) {
         if (error.status) {

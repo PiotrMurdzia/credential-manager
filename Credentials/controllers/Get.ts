@@ -10,7 +10,7 @@ export const get = async (req: HttpRequest) => {
         checkRequestQueryParamsForGetOrRemove(uuid);
 
         // Check if row with uuid already exists
-        const response_from_db = await Credential.get(Number(uuid));
+        const response_from_db = await Credential.get(uuid);
 
         if (!response_from_db) {
             return {
