@@ -22,7 +22,7 @@ export default class Credential {
             RowKey: uuid,
             PartitionKey: uuid,
             password: password,
-            id_entity: id_entity,
+            id_entity: id_entity.toString(),
             created_at: new Date().toISOString()
         };
 
