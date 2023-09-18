@@ -15,25 +15,25 @@ export const checkRequestQueryParamsForDelete = (id_entity: string) => {
     }
 }
 
-export const checkRequestBodyParamsForCreateOrUpdate = (uuid: string, password: string) => {
-    if (!uuid || !password) {
+export const checkRequestBodyParamsForCreateOrUpdate = (id_connection: string, password: string) => {
+    if (!id_connection || !password) {
         throw {
             status: 400,
             body: {
                 status: 'Error',
-                description: returnRequiredParamsErrorMessage(['uuid', 'password'], 'body')
+                description: returnRequiredParamsErrorMessage(['id_connection', 'password'], 'body')
             }
         };
     }
 }
 
-export const checkRequestQueryParamsForGetOrRemove = (uuid: string) => {
-    if (!uuid) {
+export const checkRequestQueryParamsForGetOrRemove = (id_connection: string) => {
+    if (!id_connection) {
         throw {
             status: 400,
             body: {
                 status: 'Error',
-                description: returnRequiredParamsErrorMessage(['uuid'], 'body')
+                description: returnRequiredParamsErrorMessage(['id_connection'], 'body')
             }
         };
     }
