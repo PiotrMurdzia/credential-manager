@@ -1,15 +1,13 @@
 import * as CryptoJS from 'crypto-js';
+const { ENCRYPTION_KEY_SECRET } = require('../../_common/parameters/EnvParameters');
 
 export class Password {
-  // Replace these with your own secure keys
-  private static readonly encryption_key = '6p.1V2p;0dV=(hS%*Zuj';
-
   /**
     * Encrypt a password
     * @param password Password to encrypt.
     * @return Encrypted password as a base64-encoded string.
   */
-  public static encryptPassword = (password: string): string => CryptoJS.AES.encrypt(password, Password.encryption_key).toString();
+  public static encryptPassword = (password: string): string => CryptoJS.AES.encrypt(password, ENCRYPTION_KEY_SECRET).toString();
 
   /**
     * Decrypt an encrypted password
@@ -17,7 +15,7 @@ export class Password {
     * @return Decrypted password.
   */
   public static decryptPassword = (encrypted_password: string): string => {
-    const bytes = CryptoJS.AES.decrypt(encrypted_password, Password.encryption_key);
+    const bytes = CryptoJS.AES.decrypt(encrypted_password, ENCRYPTION_KEY_SECRET);
 
     const decrypted_password = bytes.toString(CryptoJS.enc.Utf8);
 
