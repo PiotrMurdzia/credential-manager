@@ -1,5 +1,5 @@
 import { HttpRequest } from "@azure/functions";
-import { checkRequestBodyParamsForCreateOrUpdate, checkRequestQueryParamsForGetOrRemove } from "../../_helpers/RequestParamsHelper";
+import { checkIfIdConnectionTypeIsString, checkRequestQueryParamsForGetOrRemove } from "../../_helpers/RequestParamsHelper";
 import Credential from '../../_common/models/Credential.model';
 
 export const remove = async (req: HttpRequest) => {
@@ -8,6 +8,9 @@ export const remove = async (req: HttpRequest) => {
     try {
         // Chack body params
         checkRequestQueryParamsForGetOrRemove(id_connection);
+
+        // Check connection
+        checkIfIdConnectionTypeIsString(id_connection);
 
         // Check if row with id_connection already exists
         let response_from_db = await Credential.get(id_connection.toString());

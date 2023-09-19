@@ -38,3 +38,15 @@ export const checkRequestQueryParamsForGetOrRemove = (id_connection: string) => 
         };
     }
 }
+
+export const checkIfIdConnectionTypeIsString = (id_connection: any) => {
+    if (typeof id_connection !== 'string') {
+        throw {
+            status: 400,
+            body: {
+                status: 'Error',
+                description: 'Invalid data format: id_connection must be a string'
+            }
+        };
+    }
+}

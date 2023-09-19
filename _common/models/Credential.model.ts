@@ -48,7 +48,7 @@ export default class Credential {
      **/
     static get = async (id_connection: string) => {
         // Define the query
-        const query = new AzureStorage.TableQuery().where('id_connection eq ?', String(id_connection));
+        const query = new AzureStorage.TableQuery().where('id_connection eq ?', id_connection);
 
         // Get objects from DB
         const results: any = await new Promise((resolve, reject) => {

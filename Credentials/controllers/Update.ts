@@ -1,5 +1,5 @@
 import { HttpRequest } from "@azure/functions";
-import { checkRequestBodyParamsForCreateOrUpdate } from "../../_helpers/RequestParamsHelper";
+import { checkIfIdConnectionTypeIsString, checkRequestBodyParamsForCreateOrUpdate } from "../../_helpers/RequestParamsHelper";
 import Credential from '../../_common/models/Credential.model';
 import { Password } from "../models/Password";
 
@@ -10,20 +10,21 @@ export const update = async (req: HttpRequest) => {
         // Chack body params
         checkRequestBodyParamsForCreateOrUpdate(id_connection, password);
 
+        // Check connection
+        checkIfIdConnectionTypeIsString(id_connection);
+
         const encrypt_password = Password.encryptPassword(password);
 
         // Check if row with id_connection already exists
         let response_from_db = await Credential.get(id_connection.toString());
 
-        // If not exist create new record
+        // If not exist create
         if (!response_from_db) {
-            await Credential.create(encrypt_password, id_connection.toString());
-
             return {
-                status: 200,
+                status: 404,
                 body: {
-                    status: 'OK',
-                    description: 'Resource not founded - created new successfully.'
+                    status: 'Fail',
+                    description: 'Resource with the provided ID Credential does not exist.'
                 }
             };
         }
