@@ -10,7 +10,7 @@ export const remove = async (req: HttpRequest) => {
         checkRequestQueryParamsForGetOrRemove(id_connection);
 
         // Check if row with id_connection already exists
-        let response_from_db = await Credential.get(id_connection);
+        let response_from_db = await Credential.get(id_connection.toString());
 
         if (!response_from_db) {
             return {
