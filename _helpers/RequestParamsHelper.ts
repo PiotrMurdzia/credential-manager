@@ -2,14 +2,14 @@ type RequertParamsType = 'body' | 'query';
 
 const returnRequiredParamsErrorMessage = (params: Array<string>, source: RequertParamsType) => `Missing some required ${source.toString()} params ( check: ${params.join(', ')} ).`;
 
-export const checkRequestQueryParamsForDelete = (id_entity: string) => {
+export const checkRequestQueryParamsForDelete = (id_connection: string) => {
     // Check fi required query params exists
-    if (!id_entity) {
+    if (!id_connection) {
         throw {
             status: 400,
             body: {
                 status: 'Error',
-                description: returnRequiredParamsErrorMessage(['id_entity'], 'query')
+                description: returnRequiredParamsErrorMessage(['id_connection'], 'query')
             }
         };
     }
