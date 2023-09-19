@@ -4,20 +4,20 @@ import Credential from '../../_common/models/Credential.model';
 import { Password } from "../models/Password";
 
 export const update = async (req: HttpRequest) => {
-    const { uuid, password } = req.body;
+    const { id_connection, password } = req.body;
 
     try {
         // Chack body params
-        checkRequestBodyParamsForCreateOrUpdate(uuid, password);
+        checkRequestBodyParamsForCreateOrUpdate(id_connection, password);
 
         const encrypt_password = Password.encryptPassword(password);
 
-        // Check if row with uuid already exists
-        let response_from_db = await Credential.get(uuid);
+        // Check if row with id_connection already exists
+        let response_from_db = await Credential.get(id_connection);
 
         // If not exist create new record
         if (!response_from_db) {
-            await Credential.create(encrypt_password, uuid);
+            await Credential.create(encrypt_password, id_connection);
 
             return {
                 status: 200,

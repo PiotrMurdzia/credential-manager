@@ -3,21 +3,21 @@ import { checkRequestBodyParamsForCreateOrUpdate, checkRequestQueryParamsForGetO
 import Credential from '../../_common/models/Credential.model';
 
 export const remove = async (req: HttpRequest) => {
-    const { uuid } = req.body;
+    const { id_connection } = req.body;
 
     try {
         // Chack body params
-        checkRequestQueryParamsForGetOrRemove(uuid);
+        checkRequestQueryParamsForGetOrRemove(id_connection);
 
-        // Check if row with uuid already exists
-        let response_from_db = await Credential.get(uuid);
+        // Check if row with id_connection already exists
+        let response_from_db = await Credential.get(id_connection);
 
         if (!response_from_db) {
             return {
                 status: 404,
                 body: {
                     status: 'Fail',
-                    description: 'Resource with the provided UUID does not exist.'
+                    description: 'Resource with the provided id_connection does not exist.'
                 }
             };
         }
