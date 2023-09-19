@@ -11,7 +11,7 @@ export const create = async (req: HttpRequest) => {
         checkRequestBodyParamsForCreateOrUpdate(id_connection, password);
 
         // Check if row with id_connection already exists
-        const response_from_db = await Credential.get(id_connection);
+        const response_from_db = await Credential.get(id_connection.toString());
 
         if (response_from_db) {
             return {
@@ -25,7 +25,7 @@ export const create = async (req: HttpRequest) => {
 
         const encrypt_password = Password.encryptPassword(password);
 
-        await Credential.create(encrypt_password, id_connection);
+        await Credential.create(encrypt_password, id_connection.toString());
     }
     catch (error) {
         if (error.status) {

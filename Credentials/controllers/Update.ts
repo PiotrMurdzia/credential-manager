@@ -13,11 +13,11 @@ export const update = async (req: HttpRequest) => {
         const encrypt_password = Password.encryptPassword(password);
 
         // Check if row with id_connection already exists
-        let response_from_db = await Credential.get(id_connection);
+        let response_from_db = await Credential.get(id_connection.toString());
 
         // If not exist create new record
         if (!response_from_db) {
-            await Credential.create(encrypt_password, id_connection);
+            await Credential.create(encrypt_password, id_connection.toString());
 
             return {
                 status: 200,
